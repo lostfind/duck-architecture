@@ -1,6 +1,7 @@
 package model
 
-type Customer struct {
+type Seller struct {
 	ID   int
+	Code string
 	Name string
 }

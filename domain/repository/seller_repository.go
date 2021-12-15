@@ -4,6 +4,7 @@ import "duck/domain/model"
 
 type SellerRepository interface {
 	GetSeller(id int) model.Seller
-	GetConsumer(salesID int) model.Consumer
+	GetConsumer(id int) model.Consumer
 	GetProduct(id int) model.Product
+	SaleHistory() []model.Product
 }

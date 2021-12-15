@@ -7,22 +7,24 @@ import (
 )
 
 type ConsumerUsecase struct {
-	consumerRepo repository.ConsumerRepository
-	productRepo  repository.ProductRepository
-	sellerRepo   repository.SellerRepository
+	repo repository.ConsumerRepository
+}
+
+func NewConsumerUsecase(repo repository.ConsumerRepository) *ConsumerUsecase {
+	return &ConsumerUsecase{repo}
 }
 
 func (u *ConsumerUsecase) Buy(consumerID, productID int) error {
-	product := u.productRepo.GetProduct(productID)
+	product := u.repo.GetProduct(productID)
 	if product.IsSoldout() {
 		return errors.New("Soldout")
 	}
 
-	if err := u.consumerRepo.Buy(product); err != nil {
+	if err := u.repo.Buy(product); err != nil {
 		return err
 	}
 
-	seller := u.sellerRepo.GetSeller(product.SellerID)
+	seller := u.repo.GetSeller(product.SellerID)
 	u.Notification(seller)
 
 	return nil

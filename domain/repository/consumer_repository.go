@@ -7,4 +7,6 @@ type ConsumerRepository interface {
 	LikedProducts(id int) []model.Product
 	Buy(product model.Product) error
 	OrderHistory(id int) []model.Product
+	GetProduct(id int) model.Product
+	GetSeller(id int) model.Seller
 }
